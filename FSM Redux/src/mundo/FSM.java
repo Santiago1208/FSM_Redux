@@ -1,6 +1,10 @@
 package mundo;
 
+import java.util.HashMap;
+
 public class FSM {
+	
+	private boolean type;
 	
 	private int inputCapacity;
 	
@@ -10,10 +14,17 @@ public class FSM {
 	
 	private char[] outputAlphabet;
 
-	public FSM(int inputCapacity, int outputCapacity) {
+	private HashMap<String, State> states;
+
+	public FSM(boolean type, int inputCapacity, int outputCapacity) {
 		super();
+		this.type = type;
 		this.inputCapacity = inputCapacity;
 		this.outputCapacity = outputCapacity;
+	}
+	
+	public void createState(boolean type) {
+		
 	}
 
 	public int getInputCapacity() {
