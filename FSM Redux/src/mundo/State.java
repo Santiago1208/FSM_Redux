@@ -76,4 +76,9 @@ public class State implements IMealyState, IMooreState {
 		
 	}
 
+	@Override
+	public void addTransition(IMealyTransition transition) {
+		transitions.add((Transition) transition);
+	}
+
 }

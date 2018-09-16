@@ -61,7 +61,7 @@ public class FSM {
 
 	
 	public FSM(boolean type, String rawInputAlphabet, String rawOutputAlphabet, 
-			String rawStates, String transitionFunction) throws MachineException {
+			String rawStates, String[][] transitionFunction) throws MachineException {
 		this.type = type;
 		inputAlphabet = buildAlphabetSet(rawInputAlphabet);
 		outputAlphabet = buildAlphabetSet(rawOutputAlphabet);
@@ -122,41 +122,47 @@ public class FSM {
 	 * @param rawTransitions
 	 * @throws TransitionException
 	 */
-	public void buildTransitions(boolean typeMachine, String rawTransitions) throws TransitionException {
-		String[] rows = rawTransitions.split("\n");
-		if (rows.length != states.size()) {
-			throw new TransitionException("Algunos estados no tienen transiciones definidas");
+	public String[][] buildTransitions(boolean typeMachine, String[][] rawTransitions) 
+			throws TransitionException {
+		if (rawTransitions.length != states.size() + 1) {
+			throw new TransitionException("A algún estado no se le definieron transiciones");
 		}
 		if (typeMachine == FSM.MEALY_TYPE) {
-			buildMealyTransitions(rows);
+			buildMealyTransitions(rawTransitions);
 		} else {
-			buildMooreTransitions(rows);
+			buildMooreTransitions(rawTransitions);
 		}
+		return null;
 	}
 	
-	private void buildMealyTransitions(String[] rows) throws MealyTransitionException {
-		 for (int i = 0; i < rows.length; i++) {
-			String currentRow = rows[i];
-			String[] items = currentRow.split(" ");
-			if (items.length != inputAlphabet.length + 1) {
-				throw new MealyTransitionException("Para algunas entradas no se ha definido transición");
-			}
-			State currentState = states.get(items[0].trim().toUpperCase());
-			for (int j = 1; j < items.length; j++) {
-				String currentItem = items[j];
-				if (currentItem.length() != Transition.MEALY_TRANSITION_COMPONENTS) {
-					throw new MealyTransitionException("Especificación errada de transición.\n"
-							+ "Forma esperada: estadoDestino,salidaEstado.\n"
-							+ "Forma ingresada:" + currentItem);
+	/**
+	 * Método que se encarga de construir las transiciones de una máquina de Mealy a partir
+	 * de una matriz.
+	 * @param rawTransitions - Son las transiciones que se crearán. Están en forma de matriz.
+	 * @throws MealyTransitionException - 
+	 */
+	private void buildMealyTransitions(String[][] rawTransitions) throws MealyTransitionException {
+		 for (int i = 1; i < rawTransitions.length; i++) {
+			IMealyState currentState = null;
+			for (int j = 0; j < rawTransitions[i].length; j++) {
+				switch (j) {
+				case 0:
+					currentState = states.get(rawTransitions[i][j]);
+					break;
+				default:
+					char inputReceived = rawTransitions[0][j].charAt(0);
+					State targetState = states.get("" + rawTransitions[i][j].toUpperCase().charAt(0));
+					char outputGiven = rawTransitions[i][j].charAt(2);
+					IMealyTransition newTransition = new Transition(inputReceived, targetState);
+					newTransition.setOutput(outputGiven);
+					currentState.addTransition(newTransition);
+					break;
 				}
-				char inputReceived = currentItem.charAt(0);
-				State targetState = states.get("" + currentItem.charAt(2));
-				Transition newTransition = new Transition(inputReceived, targetState);
 			}
 		}
 	}
 	
-	private void buildMooreTransitions(String[] rows) throws MooreTransitionException {
+	private void buildMooreTransitions(String[][] rawTransitions) throws MooreTransitionException {
 		
 	}
 	

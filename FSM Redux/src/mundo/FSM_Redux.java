@@ -38,12 +38,12 @@ public class FSM_Redux {
 	 * @param transitionFunction
 	 */
 	public void createFSM(boolean type, String rawInputAlphabet, String rawOutputAlphabet, 
-			String rawStates, String transitionFunction) throws MachineException {
+			String rawStates, String[][] transitionFunction) throws MachineException {
 		currentFSM = new FSM(type, rawInputAlphabet, rawOutputAlphabet, rawStates, transitionFunction);
 	}
 	
 	private void createMealyFSM(String rawInputAlphabet, String rawOutputAlphabet,
-			String rawStates, String transitionFunction) throws MealyException{
+			String rawStates, String[][] transitionFunction) throws MealyException{
 		try {
 			char[] builtInputAlphabet = buildAlphabetSet(rawInputAlphabet);
 			char[] builtOutputAlphabet = buildAlphabetSet(rawOutputAlphabet);

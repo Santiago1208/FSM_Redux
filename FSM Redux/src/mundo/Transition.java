@@ -72,4 +72,10 @@ public class Transition implements IMealyTransition, IMooreTransition {
 		return null;
 	}
 
+	@Override
+	public void setOutput(char output) {
+		outputGiven = output;
+		
+	}
+
 }

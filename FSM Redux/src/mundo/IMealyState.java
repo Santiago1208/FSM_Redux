@@ -2,7 +2,7 @@ package mundo;
 
 public interface IMealyState {
 	
-	public void createState() throws Exception;
+	public void addTransition(IMealyTransition transition);
 	
 	public String getName();
 	
