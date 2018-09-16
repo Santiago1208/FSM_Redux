@@ -1,30 +1,68 @@
 package mundo;
 
-import java.util.ArrayList;
-
 public class Transition implements IMealyTransition, IMooreTransition {
 	
-	private ArrayList<State> states;
+	// -------------------------------------------------------------------------------------------------
+	// Constantes
+	// -------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Representa el número de elementos que debe tener la especificación de una transición
+	 * tipo Mealy: estadoDestino,salidaTransición
+	 */
+	public final static int MEALY_TRANSITION_COMPONENTS = 3;
+	
+	
+	/**
+	 * Representa el número de elementos que debe tener la especificación de una transición
+	 * tipo Moore: estadoDestino
+	 */
+	public final static int MOORE_TRANSITION_COMPONENTS = 1;
+	
+	// -------------------------------------------------------------------------------------------------
+	// Atributos
+	// -------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Representa el símbolo de entrada que origina la transición
+	 */
+	private char inputReceived;
+	
+	/**
+	 * Representa el símbolo de salida que resulta después de efectuada la transición
+	 */
+	private char outputGiven;
+	
+	/**
+	 * Representa el estado de destino de la transición
+	 */
+	private State targetState;
+	
+	// -------------------------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------------------------
 
-	public Transition() {
-		// TODO Auto-generated constructor stub
+	
+	/**
+	 * @param inputReceived
+	 * @param targetState
+	 */
+	public Transition(char inputReceived, State targetState) {
+		this.inputReceived = inputReceived;
+		this.targetState = targetState;
 	}
-
-	@Override
-	public char getInput() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	// -------------------------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------------------------
 
 	@Override
 	public char getOutput() {
-		// TODO Auto-generated method stub
-		return 0;
+		return outputGiven;
 	}
 
 	@Override
 	public IMooreState getDestinationStateMoore() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -2,14 +2,44 @@ package mundo;
 
 import java.util.ArrayList;
 
+import excepciones.MealyTransitionException;
+import excepciones.MooreTransitionException;
+import excepciones.TransitionException;
+
 public class State implements IMealyState, IMooreState {
 	
+	// -------------------------------------------------------------------------------------------------
+	// Atributos
+	// -------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Representa el nombre del estado
+	 */
+	private String name;
+	
+	/**
+	 * Representa el símbolo de salida del estado
+	 */
+	private char outputSymbol;
+	
+	/**
+	 * Representa las transiciones que pueden haber desde el estado
+	 */
 	private ArrayList<Transition> transitions;
+	
+	// -------------------------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------------------------
 
-	public State() {
-		// TODO Auto-generated constructor stub
+	public State(String name) {
+		this.name = name;
+		transitions = new ArrayList<>();
 	}
-
+	
+	// -------------------------------------------------------------------------------------------------
+	// Servicios
+	// -------------------------------------------------------------------------------------------------
+	
 	@Override
 	public char getOutput() {
 		// TODO Auto-generated method stub

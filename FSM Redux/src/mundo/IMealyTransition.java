@@ -2,7 +2,7 @@ package mundo;
 
 public interface IMealyTransition {
 	
-	public char getInput();
+	
 	
 	public char getOutput();
 	
