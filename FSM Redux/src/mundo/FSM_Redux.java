@@ -8,7 +8,8 @@ public class FSM_Redux {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createFSM(boolean type, String inputAlphabet, String outputAlphabet, String transitionFunction) {
+	public void createFSM(boolean type, String inputAlphabet, String outputAlphabet,
+			String transitionFunction) {
 	}
 
 	public FSM buildMinFSM() {
