@@ -1,22 +1,23 @@
 package excepciones;
 
-public class MealyException extends MachineException {
+public class TransitionNotAddedException extends Exception {
 
 	/**
 	 * Versión de serialización
 	 */
-	private static final long serialVersionUID = -6060696810347434371L;
+	private static final long serialVersionUID = -747548486798974580L;
 	
 	// -------------------------------------------------------------------------------------------------
 	// Constructor
 	// -------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Construye una excepción tipo Mealy
-	 * @param message - Es el mensaje que explica la excepción
+	 * Construye una excepción para una transición de un estado que no se haya
+	 * agregado.
+	 * @param message Es la causa de la excepción
 	 */
-	public MealyException(String message) {
+	public TransitionNotAddedException(String message) {
 		super(message);
 	}
-
+	
 }

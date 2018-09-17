@@ -1,21 +1,22 @@
 package excepciones;
 
-public class AlphabetException extends MachineException {
+public class StateNotFoundException extends Exception {
 
 	/**
 	 * Versión de serialización
 	 */
-	private static final long serialVersionUID = 2918171711314364784L;
+	private static final long serialVersionUID = -8486842514974849162L;
 	
 	// -------------------------------------------------------------------------------------------------
 	// Constructor
 	// -------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Construye una excepción para errores en los alfabetos
-	 * @param message - Es el mensaje que explica la excepción
+	 * Construye una excepción para un estado de la máquina que no se haya
+	 * encontrado.
+	 * @param message Es la causa de la excepción
 	 */
-	public AlphabetException(String message) {
+	public StateNotFoundException(String message) {
 		super(message);
 	}
 

@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class FsmReduxPanel extends JPanel implements ActionListener {
 
@@ -38,9 +39,24 @@ public class FsmReduxPanel extends JPanel implements ActionListener {
 	private JTable tableFSMRedux;
 	
 	/**
+	 * Representa el modelo usado dentro de la tabla
+	 */
+	private DefaultTableModel tableModel;
+	
+	/**
+	 * Representa los datos del cuerpo de la tabla
+	 */
+	private String[][] tableData;
+	
+	/**
+	 * Representa la cabecera de la tabla.
+	 */
+	private String[] header;
+	
+	/**
 	 * Representa el botón para crear una nueva máquina de estado finito reducida
 	 */
-	private JButton buttonCalcule; 
+	private JButton buttonCalculate; 
 	
 	/**
 	 * Representa la ventana propietaria del panel
@@ -54,11 +70,17 @@ public class FsmReduxPanel extends JPanel implements ActionListener {
 		
 		// Inicialización de componentes
 		TitledBorder border = new TitledBorder("FSM Reducida");
-		DefaultTableModel modelo = new DefaultTableModel();
-		tableFSMRedux = new JTable(modelo);
-		buttonCalcule = new JButton("Calcular FSM reducida");
-		buttonCalcule.addActionListener(this);
-		buttonCalcule.setActionCommand(CLC_FSM_REDUX);
+		
+		// Tabla
+		tableData = new String[0][0];
+		header = new String[0];
+		tableModel = new DefaultTableModel(tableData, header);
+		tableFSMRedux = new JTable(tableModel);
+		
+		// Botón para calcular
+		buttonCalculate = new JButton("Calcular FSM reducida");
+		buttonCalculate.addActionListener(this);
+		buttonCalculate.setActionCommand(CLC_FSM_REDUX);
 		
 		JScrollPane js=new JScrollPane(tableFSMRedux);
 		js.setVisible(true);
@@ -68,7 +90,19 @@ public class FsmReduxPanel extends JPanel implements ActionListener {
 		border.setTitlePosition(TitledBorder.TOP);
 		setBorder(border);
 		add(tableFSMRedux, BorderLayout.CENTER);
-		add(buttonCalcule, BorderLayout.SOUTH);
+		add(buttonCalculate, BorderLayout.SOUTH);
+	}
+	
+	// -------------------------------------------------------------------------------------------------
+	// Servicios
+	// -------------------------------------------------------------------------------------------------
+	
+	public void initializeTableAlphabet(char[] machineAlphabet) {
+		
+	}
+	
+	public void initializeTableStates(char[] machineStates) {
+		
 	}
 
 	@Override
