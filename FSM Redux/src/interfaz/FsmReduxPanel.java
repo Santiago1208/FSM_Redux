@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,26 +71,29 @@ public class FsmReduxPanel extends JPanel implements ActionListener {
 		
 		// Inicialización de componentes
 		TitledBorder border = new TitledBorder("FSM Reducida");
+		border.setTitleJustification(TitledBorder.LEFT);
+		border.setTitlePosition(TitledBorder.TOP);
+		setBorder(border);
 		
 		// Tabla
-		tableData = new String[0][0];
-		header = new String[0];
-		tableModel = new DefaultTableModel(tableData, header);
-		tableFSMRedux = new JTable(tableModel);
+//		tableData = new String[0][0];
+//		header = new String[0];
+		
+		//Inicio de tabla
+		String [] header={"name","age"};
+		Object [][] data={{"akash","20"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"}};
+		
+//		tableModel = new DefaultTableModel(data, header);
+		tableFSMRedux = new JTable(data, header);
 		
 		// Botón para calcular
 		buttonCalculate = new JButton("Calcular FSM reducida");
 		buttonCalculate.addActionListener(this);
 		buttonCalculate.setActionCommand(CLC_FSM_REDUX);
 		
-		JScrollPane js=new JScrollPane(tableFSMRedux);
-		js.setVisible(true);
-		add(js);
 		
-		border.setTitleJustification(TitledBorder.LEFT);
-		border.setTitlePosition(TitledBorder.TOP);
-		setBorder(border);
-		add(tableFSMRedux, BorderLayout.CENTER);
+		add(tableFSMRedux);
+		add(new JScrollPane(tableFSMRedux));
 		add(buttonCalculate, BorderLayout.SOUTH);
 	}
 	
